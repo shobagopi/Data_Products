@@ -1,0 +1,63 @@
+---
+title: "Body Mass Index (BMI) Calculator"
+subtitle: "Developing Data Products Assignment"
+author: "Shobana Gopi"
+date: "4 April 2017"
+output: ioslides_presentation
+---
+
+## Body Mass Index (BMI)
+
+It is also known as Quetelet Index. The BMI is an attempt to quantify the amount of tissue mass (muscle, fat, and bone) in an individual, and then categorize that person as underweight, normal weight, overweight, or obese based on that value.
+
+The Hospital Authority of Hong Kong recommends the use of the following BMI ranges
+
+- BMI <18.5       : Low
+- BMI [18.5-24.9] : Normal
+- BMI [25-29.9]   : Obese Level 1
+- BMI [30-34.9]   : Obese Level 2
+- BMI [35-39.9]   : Obese Level 3
+- BMI >=40        : Obese Level 4
+
+## Mathematical Formula
+
+The Weight is converted from Pounds(lb) to Kilogram(kg)
+The Height is converted from Feet(ft) to Meter(m)
+
+BMI = Weight / (Height)^2
+
+Example
+
+```{r echo = TRUE}
+BMI<-function(weight,height) {
+    weight<-weight * 0.453592
+    height<-height * 0.3048
+    weight/(height^2)
+}
+
+BMI(100,5.6)
+```
+
+## Categorization
+
+The Category under which a person with weight 100 lb and a height of 5.6 ft falls according to The Hospital Authority of Hong Kong has been shown below
+
+```{r echo = TRUE}
+category_function<-function(weight,height){
+  weight<-weight * 0.453592
+  height<-height * 0.3048
+  BMI_value<-weight/(height^2)
+  ifelse(BMI_value<18.5,"Low", ifelse(BMI_value<25,"Normal",
+  ifelse(BMI_value<30,"Obese Level 1",
+  ifelse(BMI_value<35,"Obese Level 2",
+  ifelse(BMI_value<40,"Obese Level 3","Obese Level 4"
+  )))))
+}
+category_function(100,5.6)
+```
+
+## Conclusion
+
+The BMI is generally used as a means of correlation between groups related by general mass and can serve as a vague means of estimating adiposity. The duality of the BMI is that, while it is easy to use as a general calculation, it is limited as to how accurate and pertinent the data obtained from it can be.
+
+BMI Does not differentiate between muscle mass and fat mass and ignores variation in physical characteristics
